@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-mcs -out:main.exe -- *.cs
+shopt -s globstar
+mcs -out:main.exe -- **/*.cs
