@@ -13,7 +13,7 @@ namespace LaboratoryWork
       double[] z = LaboratoryWork.Utils.Array.ReadDouble(LaboratoryWork.Utils.Base.ReadInt32("Please enter z array length value: "), "Please enter z[{0}] value: ").PrintLine(", ").ToArray();
       
       Console.WriteLine("Positive number count == {0}", z.Where(x => x > 0).Count());
-      Console.WriteLine("In [-7, 5.2] range number count == {0}", z.Where(x => x > -7 && x < 5.2).Count());
+      Console.WriteLine("In [-7, 5.2] range number count == {0}", z.Where(x => x >= -7 && x <= 5.2).Count());
       double[] p = z.Where(x => x < 0).ToArray().PrintLine(", ").ToArray();
     }
   }
