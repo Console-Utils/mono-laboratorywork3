@@ -8,7 +8,7 @@ namespace LaboratoryWork.Utils
     public static double[] ReadDouble(int count, string prompt = "")
     {
       if (count < 0)
-        throw new ArgumentException(nameof(count), "array length can't be negative");
+        throw new ArgumentOutOfRangeException(nameof(count), "array length can't be negative");
       
       double[] result = new double[count];
       for (var i = 0; i < count; i++)
