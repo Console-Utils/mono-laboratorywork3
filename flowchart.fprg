@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="Alvin"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2021-04-04 06:43:26 PM"/>
+        <attribute name="created" value="QWx2aW47REVTS1RPUC03RENLVUJPOzIwMjEtMDQtMDQ7MDU6MTE6NDggUE07Mjg2MA=="/>
+        <attribute name="edited" value="QWx2aW47REVTS1RPUC03RENLVUJPOzIwMjEtMDQtMDQ7MDY6NDM6MjYgUE07MzE7MzAyMQ=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="Length" type="Integer" array="False" size=""/>
+            <assign variable="Length" expression="4"/>
+            <declare name="z" type="Real" array="True" size="Length"/>
+            <output expression="&quot;Array reading...&quot;" newline="True"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="Size(z) - 1" direction="inc" step="1">
+                <output expression="&quot;z[&quot; &amp; i &amp; &quot;]:&quot;" newline="False"/>
+                <input variable="z[i]"/>
+            </for>
+            <output expression="&quot;z array: &quot;" newline="False"/>
+            <call expression="OutputArray(z, &quot;, &quot;)"/>
+            <declare name="positiveCount" type="Integer" array="False" size=""/>
+            <declare name="negativeCount" type="Integer" array="False" size=""/>
+            <declare name="inRangeCount" type="Integer" array="False" size=""/>
+            <assign variable="positiveCount" expression="GetPositiveCount(z)"/>
+            <assign variable="negativeCount" expression="GetNegativeCount(z)"/>
+            <comment text="&#9888;&#65039; Bug: syntax error when passing negative real numnber to function. GetInRangeCount function is intendeed do this work."/>
+            <assign variable="inRangeCount" expression="0"/>
+            <for variable="i" start="0" end="Size(z) - 1" direction="inc" step="1">
+                <if expression="z[i] &gt;= -7 &amp;&amp; z[i] &lt;= 5.2">
+                    <then>
+                        <assign variable="inRangeCount" expression="inRangeCount + 1"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;Positive count == &quot; &amp; positiveCount" newline="True"/>
+            <output expression="&quot;In [-7, 5.2] range count == &quot; &amp; inRangeCount" newline="True"/>
+            <declare name="p" type="Real" array="True" size="negativeCount"/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <assign variable="j" expression="0"/>
+            <for variable="i" start="0" end="Size(z) - 1" direction="inc" step="1">
+                <if expression="z[i] &lt; 0">
+                    <then>
+                        <assign variable="p[j]" expression="z[i]"/>
+                        <assign variable="j" expression="j + 1"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;p array: &quot;" newline="False"/>
+            <call expression="OutputArray(p, &quot;, &quot;)"/>
+        </body>
+    </function>
+    <function name="GetInRangeCount" type="Integer" variable="count">
+        <parameters>
+            <parameter name="input" type="Real" array="True"/>
+            <parameter name="low" type="Real" array="False"/>
+            <parameter name="high" type="Real" array="False"/>
+        </parameters>
+        <body>
+            <declare name="count" type="Integer" array="False" size=""/>
+            <assign variable="count" expression="0"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="Size(input) - 1" direction="inc" step="1">
+                <if expression="input[i] &gt; low &amp;&amp; input[i] &lt; high">
+                    <then>
+                        <assign variable="count" expression="count + 1"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+    <function name="GetNegativeCount" type="Integer" variable="count">
+        <parameters>
+            <parameter name="input" type="Real" array="True"/>
+        </parameters>
+        <body>
+            <declare name="count" type="Integer" array="False" size=""/>
+            <assign variable="count" expression="0"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="Size(input) - 1" direction="inc" step="1">
+                <if expression="input[i] &lt; 0">
+                    <then>
+                        <assign variable="count" expression="count + 1"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+    <function name="GetPositiveCount" type="Integer" variable="count">
+        <parameters>
+            <parameter name="input" type="Real" array="True"/>
+        </parameters>
+        <body>
+            <declare name="count" type="Integer" array="False" size=""/>
+            <assign variable="count" expression="0"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="Size(input) - 1" direction="inc" step="1">
+                <if expression="input[i] &gt; 0">
+                    <then>
+                        <assign variable="count" expression="count + 1"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+    <function name="OutputArray" type="None" variable="">
+        <parameters>
+            <parameter name="input" type="Real" array="True"/>
+            <parameter name="delimiter" type="String" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="Size(input) - 1" direction="inc" step="1">
+                <output expression="input[i]" newline="False"/>
+                <if expression="i &lt; Size(input) - 1">
+                    <then>
+                        <output expression="delimiter" newline="False"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;&quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
